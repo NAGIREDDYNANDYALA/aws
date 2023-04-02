@@ -1,0 +1,28 @@
+import json
+import boto3
+
+client = boto3.client('ec2')
+
+def lambda_handler(event, context):
+    instances  = []
+    for instance in event['detail']['responseElements']['instancesSet']['items']:
+        print(instance['instanceId'])
+        instances.append(instance['instanceId'])
+        
+    response = client.create_tags(
+    Resources=instances,
+    Tags=[
+        {
+            'Key': 'Name',
+            'Value': 'JHCINSTANCE'
+        },
+         {
+            'Key': 'Project',
+            'Value': 'HRAutomation'
+        }
+    ]
+)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }

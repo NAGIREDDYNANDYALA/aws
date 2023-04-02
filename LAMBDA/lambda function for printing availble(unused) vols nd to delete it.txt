@@ -1,0 +1,19 @@
+import json
+import boto3
+client = boto3.client('ec2')
+
+def lambda_handler(event, context):
+    response = client.describe_volumes(
+       Filters=[
+        {
+            'Name': 'status',
+            'Values': [
+                'available',
+            ]
+        },
+        ]
+    )
+    for vol in response['Volumes']:
+        print(vol['VolumeId'])
+        client.delete_volume(VolumeId=vol['VolumeId'])
+        print(f"{vol['VolumeId']} deleted")

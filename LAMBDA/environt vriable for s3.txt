@@ -1,0 +1,6 @@
+import json
+import os
+
+def lambda_handler(event, context):
+    s3 = boto3.resource('s3')
+    s3.meta.client.upload_file('/tmp/hello.txt', os.environ['S3_BUCKET'], 'hello.txt')
