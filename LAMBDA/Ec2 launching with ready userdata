@@ -1,0 +1,28 @@
+import os
+import boto3
+
+AMI = os.environ['AMI']
+INSTANCE_TYPE = os.environ['INSTANCE_TYPE']
+KEY_NAME = os.environ['KEY_NAME']
+SUBNET_ID =os.environ['SUBNET_ID']
+REGION = os.environ['REGION']
+
+ec2 = boto3.client('ec2', region_name=REGION)
+
+def lambda_handler(event, context):
+    init_script = """#!/bin/bash
+                sudo yum install httpd -y
+                sudo service httpd start
+                sudo echo "<h1>MY WEBSITE</h1>" >/var/www/html/index.html
+                sudo chkconfig httpd on"""
+
+    
+    instance = ec2.run_instances(
+            ImageId=AMI,
+            InstanceType=INSTANCE_TYPE,
+            KeyName=KEY_NAME,
+            SubnetId=SUBNET_ID,
+            MaxCount=1,
+            MinCount=1,
+            UserData=init_script
+    )
