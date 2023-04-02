@@ -1,0 +1,11 @@
+variable "env" {
+  default = "dev"
+}
+variable "subnet_cidrs" {
+  default = ["10.0.0.0/24","10.0.1.0/24","10.0.2.0/24"]
+}
+variable "Location" {
+  default = ["Bangalore","Hyderbad","Chennai"]
+}
+variable "vpc_cidr" {
+}

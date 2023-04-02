@@ -1,0 +1,6 @@
+output "acc_id" {
+    value = data.aws_caller_identity.account.account_id
+}
+output "az_names" {
+  value = data.aws_availability_zones.available.names
+}
