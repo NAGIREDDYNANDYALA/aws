@@ -1,0 +1,49 @@
+resource "aws_subnet" "private-2a" {
+  vpc_id            = aws_vpc.main
+  cidr_block        = "10.0.0.0/19"
+  availability_zone = "us-east-2a"
+
+  tags = {
+    "Name"                            = "private-EKS-ua-east-2a"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
+
+resource "aws_subnet" "private-2b" {
+  vpc_id            = aws_vpc.main
+  cidr_block        = "10.0.32.0/19"
+  availability_zone = "us-east-2b"
+
+  tags = {
+    "Name"                            = "private-EKS-ua-east-2b"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
+
+resource "aws_subnet" "public-2a" {
+  vpc_id                  = aws_vpc.main
+  cidr_block              = "10.0.64.0/19"
+  availability_zone       = "us-east-2a"
+  map_public_ip_on_launch = true
+
+  tags = {
+    "Name"                            = "public-EKS-us-east-2a"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
+
+resource "aws_subnet" "public-2b" {
+  vpc_id                  = aws_vpc.main
+  cidr_block              = "10.0.96.0/19"
+  availability_zone       = "us-east-2b"
+  map_public_ip_on_launch = true
+
+  tags = {
+    "Name"                            = "public-EKS-us-east-2b"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
