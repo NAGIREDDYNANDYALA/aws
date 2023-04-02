@@ -1,0 +1,6 @@
+import boto3
+client = boto3.client('ec2')
+response = client.describe_volumes()
+for vol in response['Volumes']:
+    if vol['State'] == 'available':
+        print (vol['VolumeId'],vol['Size'],vol['State'])

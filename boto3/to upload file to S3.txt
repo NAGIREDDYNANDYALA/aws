@@ -1,0 +1,5 @@
+import boto3
+client = boto3.client('s3')
+
+with open('start-ec2.py', 'rb') as data:
+    client.upload_fileobj(data, 'shn-123', 'start-ec2.py')

@@ -1,0 +1,17 @@
+import boto3
+client = boto3.client('ec2')
+response = client.create_tags(
+    Resources=[
+        'i-091fd8ae8e7950ca5','i-07c9da2d4305630f1'
+    ],
+    Tags=[
+        {
+            'Key': 'Institute',
+            'Value': 'JHC'
+        },
+        {
+            'Key': 'Location',
+            'Value': 'Bangalore'
+        }
+    ]
+)

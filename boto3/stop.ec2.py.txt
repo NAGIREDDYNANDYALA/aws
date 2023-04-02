@@ -1,0 +1,9 @@
+import boto3
+
+client = boto3.client('ec2')
+
+response = client.stop_instances(
+    InstanceIds=[
+        'i-091fd8ae8e7950ca5','i-07c9da2d4305630f1','i-0494223e29b6c3f47'
+    ],
+)

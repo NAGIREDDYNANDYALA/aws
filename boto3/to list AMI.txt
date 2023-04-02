@@ -1,0 +1,11 @@
+import boto3
+client = boto3.client('ec2')
+
+response = client.describe_images(
+   
+    Owners=[
+        'self',
+    ]
+)
+for image in response['Images']:
+    print(image['ImageId'])
